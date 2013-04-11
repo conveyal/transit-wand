@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#444"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".NewActivity" 
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/passengerImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/app_logo" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TransitWand"
+            android:textColor="#aaa"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+	 <LinearLayout
+	     android:id="@+id/linearLayout"
+	     android:layout_width="fill_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_alignLeft="@+id/passengerImageView"
+	     android:layout_below="@+id/passengerImageView"
+	     android:orientation="vertical" >
+
+	     <TextView
+	         android:id="@+id/textView1"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_marginTop="10dp"
+	         android:text="Register Phone"
+	         android:textAppearance="?android:attr/textAppearanceMedium" />
+	     
+	     <TextView
+	         android:id="@+id/userNameText"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_alignParentLeft="true"
+	         android:layout_below="@+id/passengerImageView"
+	         android:layout_marginTop="10dp"
+	         android:text="Username (optional):" />
+	     
+	     <EditText
+	         android:id="@+id/userNameTextBox"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:layout_alignParentLeft="true"
+	         android:layout_alignParentRight="true"
+	         android:singleLine="true"
+	         android:layout_below="@+id/userNameText"
+	         android:ems="10"
+	         android:imeOptions="actionDone"
+	         android:maxLines="1" />
+	     
+	   
+
+	     <Button
+	         android:id="@+id/RegisterButton"
+	         android:layout_width="125dp"
+	         android:layout_height="wrap_content"
+	         android:layout_marginTop="10dp"
+	         android:text="Register" />
+
+	 </LinearLayout>
+
+</LinearLayout>

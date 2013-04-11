@@ -1,0 +1,58 @@
+#{extends 'main-bar.html' /}
+
+
+<script id="stop-popup-tpl"  type="text/x-handlebars-template">
+
+<strong>Stop {{stopSequence}}</strong><br/>
+Board: {{board}}<br/>
+Alight: {{alight}}<br/>
+Travel Time: {{minutes}}:{{remainder}}
+</script>
+
+<script id="pattern-details-tpl"  type="text/x-handlebars-template">
+
+<strong>Description:</strong> {{routeDescription}}<br/>
+<strong>Notes:</strong> {{routeNotes}}<br/>
+
+</script>
+
+<style>.alertdrop.select2-container .select2-results {max-height: 300px;}</style>
+
+
+
+
+
+
+<div class="row-fluid" style="background-color: #fff;  position: relative;">
+
+	<div id="map">
+	</div>
+	
+	<div id="tripPatternFilter" style="position: absolute; top:10px; right:10px; width:250px;">
+		<div class="well well-small">
+			
+		<strong>Uploaded Data</strong> <!-- <a href="#" style="float: right;">Generate Report</a>  -->
+		
+		<p>Select an uploded trip pattern.</p>
+		
+		<hr style="margin: 5px 0;">
+		
+		<select id="patternSelector">
+			#{list items:patterns, as:'pattern' }
+				<option value="${pattern.id}">${pattern.headsign}</option>
+			#{/list}
+		</select>
+
+		<div style="margin: 10px;" id="patternDetails"></div>
+		<button class="btn">Export GTFS</button>
+		<button class="btn">Export Shapefile</button>
+
+	</div>
+	
+	</div>	
+
+</div>
+
+#{script "tw/upload-backbone.js"/}
+#{script "tw/upload-map.js"/}
+

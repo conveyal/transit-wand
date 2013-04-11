@@ -1,0 +1,44 @@
+package transitwand;
+
+option java_package = "com.conveyal.transitwand";
+option java_outer_classname = "TransitWandProtos";
+option optimize_for = LITE_RUNTIME;
+
+
+message Upload {
+
+	message Route {
+	
+	  message Point {
+	    required float lat = 1;
+	    required float lon = 2;
+	    optional int32 timeoffset = 3;
+	  }
+	
+	  message Stop {
+	    required float lat = 1;
+	    required float lon = 2;
+	    optional int32 arrivalTimeoffset = 3;
+	    optional int32 departureTimeoffset = 4;
+	    optional int32 board = 5;
+	    optional int32 alight = 6;
+	  }
+	  
+	  required int64 start_time = 1;
+	  
+	  repeated Point point = 2;
+	  repeated Stop stop = 3;
+	  
+	  optional string route_name = 4;
+	  optional string route_description = 5;
+	  optional string route_notes = 6;  
+	  
+	}
+
+	required int64 unit_id = 1;
+	required int32 upload_id = 2;
+	
+	repeated Route route = 3;
+	
+}
+	

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#444"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".NewActivity" 
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageView
+            android:id="@+id/passengerImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/app_logo" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TransitWand"
+            android:textColor="#aaa"
+            android:textSize="30sp" />
+
+    </LinearLayout>
+
+	 <LinearLayout
+	     android:id="@+id/linearLayout"
+	     android:layout_width="fill_parent"
+	     android:layout_height="wrap_content"
+	     android:layout_alignLeft="@+id/passengerImageView"
+	     android:layout_below="@+id/passengerImageView"
+	     android:orientation="vertical" >
+
+	     <TextView
+	         android:id="@+id/notesText"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:layout_alignParentLeft="true"
+	         android:layout_below="@+id/passengerImageView"
+	         android:layout_marginTop="10dp"
+	         android:text="Route Name (optional):" />
+	     
+	     <EditText
+	         android:id="@+id/routeName"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:layout_alignParentLeft="true"
+	         android:layout_alignParentRight="true"
+	         android:singleLine="true"
+	         android:layout_below="@+id/notesText"
+	         android:ems="10"
+	         android:imeOptions="actionNext"
+	         android:maxLines="1" />
+	     
+	    <TextView
+	         android:id="@+id/descriptionText"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:text="Route Description (optional):" />
+
+	     <EditText
+	         android:id="@+id/routeDescription"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:ems="10"
+	         android:imeOptions="actionNext"
+	          android:singleLine="true"
+	         android:maxLines="1"
+	         android:minLines="1" />
+	     
+	     <TextView
+	         android:id="@+id/totalPasssengerCount"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:text="Field Notes (optional):" />
+	     
+	     <EditText
+	         android:id="@+id/fieldNotes"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:ems="10"
+	         android:imeOptions="actionDone"
+	         android:singleLine="true"
+	         android:maxLines="1"
+	         android:minLines="1" />
+
+	     <Button
+	         android:id="@+id/ContinueButton"
+	         android:layout_width="125dp"
+	         android:layout_height="wrap_content"
+	         android:layout_marginTop="10dp"
+	         android:text="Continue" />
+
+	 </LinearLayout>
+
+</LinearLayout>
