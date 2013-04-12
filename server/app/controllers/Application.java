@@ -44,8 +44,8 @@ public class Application extends Controller {
         render(invalid);
     }
     
-    public static void export(Long routeId) throws InterruptedException {
-    	ProcessGisExport gisExport = new ProcessGisExport(routeId);
+    public static void export(Long patternId) throws InterruptedException {
+    	ProcessGisExport gisExport = new ProcessGisExport(patternId);
     	gisExport.doJob();
     	ok();
     }
@@ -125,7 +125,10 @@ public class Application extends Controller {
 	        		tps.save();
 	        		
 	        		sequenceId++;
-	        	}	       
+	        	}	   
+	        	
+	        	ProcessGisExport gisExport = new ProcessGisExport(tp.id);
+	        	gisExport.doJob();
 			}
 			
 			Logger.info("Routes uploaded: " + upload.getRouteList().size());
