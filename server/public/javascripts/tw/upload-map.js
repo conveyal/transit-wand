@@ -22,12 +22,23 @@ function loadPattern() {
 
 }
 
+function exportShapefile() {
+
+
+	window.location.href = '/public/gis/pattern_' + $('#patternSelector').val() + '.zip';
+}
+
 $(document).ready(function() {
   
 	uploadMap = new UploadMapView({unitId: unitId});
 
 	$('#patternSelector').change(function() {
 		loadPattern();
+
+	});
+
+	$('#exportShapefile').click(function() {
+		exportShapefile();
 
 	});
 

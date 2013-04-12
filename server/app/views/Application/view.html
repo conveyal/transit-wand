@@ -18,11 +18,6 @@ Travel Time: {{minutes}}:{{remainder}}
 
 <style>.alertdrop.select2-container .select2-results {max-height: 300px;}</style>
 
-
-
-
-
-
 <div class="row-fluid" style="background-color: #fff;  position: relative;">
 
 	<div id="map">
@@ -44,8 +39,8 @@ Travel Time: {{minutes}}:{{remainder}}
 		</select>
 
 		<div style="margin: 10px;" id="patternDetails"></div>
-		<button class="btn">Export GTFS</button>
-		<button class="btn">Export Shapefile</button>
+		<button class="btn disabled">Export GTFS</button>
+		<button class="btn" id="exportShapefile">Export Shapefile</button>
 
 	</div>
 	

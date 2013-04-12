@@ -15,6 +15,8 @@ import java.util.*;
 
 import javax.persistence.EntityManager;
 
+import jobs.ProcessGisExport;
+
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerationException;
@@ -41,6 +43,24 @@ public class Application extends Controller {
     public static void index(Boolean invalid) {
         render(invalid);
     }
+    
+    public static void export(Long routeId) throws InterruptedException {
+    	ProcessGisExport gisExport = new ProcessGisExport(routeId);
+    	gisExport.doJob();
+    	ok();
+    }
+    
+    public static void exportAll() throws InterruptedException {
+    	
+    	List<TripPattern> tripPatterns =  TripPattern.findAll();
+    	for(TripPattern tp: tripPatterns) {
+    		ProcessGisExport gisExport = new ProcessGisExport(tp.id);
+    		gisExport.doJob();
+    	}
+    	
+    	ok();
+    }
+
    
     public static void register(String imei, String userName) {
         
