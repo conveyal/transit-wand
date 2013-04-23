@@ -34,7 +34,7 @@ public class UploadActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_upload);
 	
-		if(getExternalFilesDir(null).listFiles().length == 0) {
+		if(getFilesDir().listFiles().length == 0) {
 			Toast.makeText(UploadActivity.this, "No data to upload.", Toast.LENGTH_SHORT).show();
 			finish();
 			return;
@@ -42,7 +42,7 @@ public class UploadActivity extends Activity {
 		
 		
 		TextView routeCountText = (TextView) findViewById(R.id.routeCountText);		
-		routeCountText.setText(getExternalFilesDir(null).listFiles().length + "");
+		routeCountText.setText(getFilesDir().listFiles().length + "");
 		
 		Long dataSize = 0l;
 		
@@ -51,7 +51,7 @@ public class UploadActivity extends Activity {
 		uploadBuilder.setUploadId(0);
 		
 		
-		for(File f : getExternalFilesDir(null).listFiles()) {
+		for(File f : getFilesDir().listFiles()) {
 			dataSize += f.length();
 			
 			DataInputStream dataInputStream = null;
@@ -140,7 +140,7 @@ public class UploadActivity extends Activity {
 						    		
 						    		Toast.makeText(UploadActivity.this, "Data uploaded.", Toast.LENGTH_SHORT).show();
 									
-						    		 for(File f : getExternalFilesDir(null).listFiles()) {
+						    		 for(File f : getFilesDir().listFiles()) {
 						    			f.delete();
 						    		} 
 						    		

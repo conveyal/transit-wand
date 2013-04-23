@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 		prefsManager = PreferenceManager.getDefaultSharedPreferences(this);
 		prefsManager.registerOnSharedPreferenceChangeListener(prefListener);
 		
-		prefsManager.edit().putBoolean("registered", false).commit();
+		//prefsManager.edit().putBoolean("registered", false).commit();
 		
 		updateRegistrationData();
 		

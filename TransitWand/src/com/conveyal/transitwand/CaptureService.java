@@ -183,7 +183,7 @@ public class CaptureService extends Service {
     		
 	    	Upload.Route routePb = currentCapture.seralize();
 	    	
-	    	File file = new File(getExternalFilesDir(null), "route_" + currentCapture.id + ".pb");
+	    	File file = new File(getFilesDir(), "route_" + currentCapture.id + ".pb");
 	    	
 	    	FileOutputStream os;
 	    	

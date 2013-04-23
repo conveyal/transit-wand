@@ -115,7 +115,7 @@ public class MapActivity extends Activity {
 		mapContainer.addView(this.mapView);
 	
 		
-		File f = getExternalFilesDir(null).listFiles()[itemPosition];
+		File f = getFilesDir().listFiles()[itemPosition];
 		DataInputStream dataInputStream = null;
 		RouteCapture rc = null;
 		try {
@@ -218,7 +218,7 @@ public class MapActivity extends Activity {
 							        switch (which){
 							        case DialogInterface.BUTTON_POSITIVE:
 							        	
-							        	getExternalFilesDir(null).listFiles()[MapActivity.itemPosition].delete();
+							        	getFilesDir().listFiles()[MapActivity.itemPosition].delete();
 							        	
 							        	Intent intent = new Intent(ReviewActivity.DELETE_ITEM_ACTION);
 							      	  	LocalBroadcastManager.getInstance(MapActivity.this).sendBroadcast(intent);

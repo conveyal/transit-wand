@@ -42,7 +42,7 @@ public class ReviewActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_review);
 		
-		if(getExternalFilesDir(null).listFiles().length == 0) {
+		if(getFilesDir().listFiles().length == 0) {
 			Toast.makeText(ReviewActivity.this, "No data to review.", Toast.LENGTH_SHORT).show();
 			finish();
 			return;
@@ -60,7 +60,7 @@ public class ReviewActivity extends Activity {
 		
 		ArrayList<RouteCapture> routes = new ArrayList<RouteCapture>();
 		
-		for(File f : getExternalFilesDir(null).listFiles()) {
+		for(File f : getFilesDir().listFiles()) {
 			
 			DataInputStream dataInputStream = null;
 			

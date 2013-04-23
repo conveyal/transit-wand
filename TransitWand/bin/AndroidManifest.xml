@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.conveyal.transitwand"
-    android:versionCode="102"
-    android:versionName="1.0.2" >
+    android:versionCode="103"
+    android:versionName="1.0.3" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -19,7 +19,7 @@
 	<uses-permission android:name="android.permission.VIBRATE"></uses-permission>
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="true"	
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@android:style/Theme.NoTitleBar">
