@@ -164,6 +164,14 @@ public class Application extends Controller {
     
     public static void list(String unitId) {
 
+    	Http.Header hd = new Http.Header();
+    	
+    	hd.name = "Access-Control-Allow-Origin";
+    	hd.values = new ArrayList<String>();
+    	hd.values.add("*");
+    	
+    	Http.Response.current().headers.put("Access-Control-Allow-Origin",hd); 
+    	
     	if(unitId == null)
     		badRequest();
     	
@@ -183,6 +191,14 @@ public class Application extends Controller {
     
     
     public static void pattern(Long patternId) {
+    	
+    	Http.Header hd = new Http.Header();
+    	
+    	hd.name = "Access-Control-Allow-Origin";
+    	hd.values = new ArrayList<String>();
+    	hd.values.add("*");
+    	
+    	Http.Response.current().headers.put("Access-Control-Allow-Origin",hd); 
     	
     	TripPattern pattern = TripPattern.findById(patternId);
     	
