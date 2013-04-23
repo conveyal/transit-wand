@@ -165,13 +165,13 @@ public class Application extends Controller {
     public static void list(String unitId) {
 
     	if(unitId == null)
-    		index(true);
+    		badRequest();
     	
     	Phone p = Phone.find("unitId = ?", unitId).first();
     	
     	
     	if(p == null)
-    		index(true);
+    		badRequest();
     	
     	List<TripPattern> patterns = TripPattern.find("route.phone = ?", p).fetch();
     	
