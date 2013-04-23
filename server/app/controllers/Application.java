@@ -2,6 +2,7 @@ package controllers;
 
 import play.*;
 import play.mvc.*;
+import utils.TripPatternSerializer;
 import utils.TripPatternShapeSerializer;
 
 import java.io.BufferedInputStream;
@@ -158,6 +159,25 @@ public class Application extends Controller {
     	List<TripPattern> patterns = TripPattern.find("route.phone = ?", p).fetch();
     	
         render(p, patterns);
+        
+    }
+    
+    public static void list(String unitId) {
+
+    	if(unitId == null)
+    		index(true);
+    	
+    	Phone p = Phone.find("unitId = ?", unitId).first();
+    	
+    	
+    	if(p == null)
+    		index(true);
+    	
+    	List<TripPattern> patterns = TripPattern.find("route.phone = ?", p).fetch();
+    	
+    	Gson gson = new GsonBuilder().registerTypeAdapter(TripPattern.class, new TripPatternSerializer()).serializeSpecialFloatingPointValues().serializeNulls().create();
+        
+    	renderJSON(gson.toJson(patterns));
         
     }
     
