@@ -88,6 +88,10 @@ public class Application extends Controller {
 			
 			for(Upload.Route r : upload.getRouteList()) {
 				
+				if(r.getPointList().size() <= 1)
+					continue;
+				
+				
 				Agency a = Agency.find("gtfsAgencyId = ?", "DEFAULT").first();
 				Route route = new Route("", r.getRouteName(), RouteType.BUS, r.getRouteDescription(),  a);
 				route.phone = phone;
