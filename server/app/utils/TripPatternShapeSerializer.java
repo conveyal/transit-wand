@@ -58,7 +58,7 @@ public class TripPatternShapeSerializer implements JsonSerializer<TripPattern>  
 
 	    	JsonArray jsonArray = new JsonArray();
 	    	
-	    	List<TripPatternStop> tpStops = TripPatternStop.find("pattern = ?", arg0).fetch();
+	    	List<TripPatternStop> tpStops = TripPatternStop.find("pattern = ? ORDER BY id", arg0).fetch();
 	    	
 	    	for(TripPatternStop tps : tpStops) {
 	    		
