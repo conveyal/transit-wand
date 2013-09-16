@@ -86,10 +86,11 @@ public class Application extends Controller {
     	
     	try {
     		
-    		data.renameTo(new File(Play.configuration.getProperty("application.dataDirectory"), imei + "_" + new Date().getTime() + ".pb"));
+    		File pbFile = new File(Play.configuration.getProperty("application.dataDirectory"), imei + "_" + new Date().getTime() + ".pb");
+    		data.renameTo(pbFile);
  
-			byte[] dataFrame = new byte[(int)data.length()];;
-			DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(data)));
+			byte[] dataFrame = new byte[(int)pbFile.length()];;
+			DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(pbFile)));
 		
 			dataInputStream.read(dataFrame);			
 			Upload upload = Upload.parseFrom(dataFrame);
