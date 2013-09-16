@@ -353,7 +353,7 @@ public class CaptureActivity extends Activity implements ICaptureActivity {
 	
 	public void updateDuration() {
 		if(captureService.capturing) {
-			((Chronometer) findViewById(R.id.captureChronometer)).setBase(captureService.currentCapture.startTime);
+			((Chronometer) findViewById(R.id.captureChronometer)).setBase(captureService.currentCapture.startMs);
 			((Chronometer) findViewById(R.id.captureChronometer)).start();
 		}
 		else {

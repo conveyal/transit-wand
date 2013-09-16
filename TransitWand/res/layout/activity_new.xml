@@ -59,7 +59,7 @@
 	         android:ems="10"
 	         android:imeOptions="actionNext"
 	         android:maxLines="1" />
-	     
+	     	 <requestFocus />
 	    <TextView
 	         android:id="@+id/descriptionText"
 	         android:layout_width="wrap_content"
@@ -108,7 +108,7 @@
 	         android:singleLine="true"
 	         android:ems="10" >
 
-	         <requestFocus />
+	        
 	     </EditText>
 
 	     <TextView
