@@ -100,9 +100,9 @@ public class ProcessGisExport extends Job {
 		
 		String exportName = "export_" + _phone;
 		
-		File outputZipFile = new File(Play.configuration.getProperty("application.publicGisDataDirectory"), exportName + ".zip");
+		File outputZipFile = new File(Play.configuration.getProperty("application.exportDataDirectory"), exportName + ".zip");
 		
-		File outputDirectory = new File(Play.configuration.getProperty("application.publicGisDataDirectory"), exportName);
+		File outputDirectory = new File(Play.configuration.getProperty("application.exportDataDirectory"), exportName);
 		
         try
         {
@@ -153,7 +153,10 @@ public class ProcessGisExport extends Job {
                 "dwellTime:Integer," +
                 
                 "arrivalTime:Integer," +
-                "departureTime:Integer"
+                "departureTime:Integer," +
+                
+				"passengerAlightings:Integer," +
+				"passengerBoardings:Integer"
                     
         );
     	
@@ -182,6 +185,9 @@ public class ProcessGisExport extends Job {
                 
                 featureBuilder.add(tps.defaultTravelTime);
                 featureBuilder.add(tps.defaultDwellTime);
+                
+                featureBuilder.add(tps.alight);
+                featureBuilder.add(tps.board);
                 
                 if(tps.defaultTravelTime != null)
                 cumulativeTime += tps.defaultTravelTime;

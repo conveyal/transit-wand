@@ -2,6 +2,7 @@ package controllers;
 
 import play.*;
 import play.mvc.*;
+import utils.DirectoryZip;
 import utils.TripPatternSerializer;
 import utils.TripPatternShapeSerializer;
 
@@ -9,6 +10,7 @@ import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.math.BigInteger;
@@ -18,12 +20,15 @@ import javax.persistence.EntityManager;
 
 import jobs.ProcessGisExport;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import au.com.bytecode.opencsv.CSVWriter;
 
 import com.conveyal.transitwand.TransitWandProtos.Upload;
 import com.google.gson.Gson;
@@ -86,7 +91,7 @@ public class Application extends Controller {
     	
     	try {
     		
-    		File pbFile = new File(Play.configuration.getProperty("application.dataDirectory"), imei + "_" + new Date().getTime() + ".pb");
+    		File pbFile = new File(Play.configuration.getProperty("application.uploadDataDirectory"), imei + "_" + new Date().getTime() + ".pb");
     		Logger.info(pbFile.toString());
     		data.renameTo(pbFile);
  
@@ -234,8 +239,87 @@ public class Application extends Controller {
     
     }
     
-    public static void export() {
-        render();
-    }
+    public static void exportCsv(String unitId) throws IOException {
+    	
+		Phone p = Phone.find("unitId = ?", unitId).first();
+		
+		if(p == null)
+			index(true);
+		
+		List<Route> routes = Route.find("phone = ?", p).fetch();
+		
+		File outputDirectory = new File(Play.configuration.getProperty("application.exportDataDirectory"), unitId);
+		File outputZipFile = new File(Play.configuration.getProperty("application.exportDataDirectory"), unitId + ".zip");
+		
+		// write routes
+		File routesFile = new File(outputDirectory, unitId + "_routes.csv");
+		File stopsFile = new File(outputDirectory, unitId + "_stops.csv");
+		
+		if(!outputDirectory.exists())
+    	{
+    		outputDirectory.mkdir();
+    	}
 
+        if(outputZipFile.exists()) {
+            outputZipFile.delete();
+        }
+		
+		FileWriter routesCsv = new FileWriter(routesFile);
+		CSVWriter rotuesCsvWriter = new CSVWriter(routesCsv);
+		
+		FileWriter stopsCsv = new FileWriter(stopsFile);
+		CSVWriter stopsCsvWriter = new CSVWriter(stopsCsv);
+		
+		String[] routesHeader = "unit_id, route_id, route_name, route_description, field_notes, vehicle_type, vehicle_capacity, start_capture".split(",");
+		
+		String[] stopsHeader = "route_id, stop_sequence, lat, lon, travel_time, dwell_time, board, alight".split(",");
+		   	 	
+		rotuesCsvWriter.writeNext(routesHeader);
+		stopsCsvWriter.writeNext(stopsHeader);
+   
+   	 	for(Route r : routes) {
+   	 		
+   	 		String[] routeData = new String[routesHeader.length];
+   	 		routeData[0] = unitId;
+   	 		routeData[1] = r.id.toString();
+   	 		routeData[2] = r.routeLongName;
+   	 		routeData[3] = r.routeDesc;
+   	 		routeData[4] = r.routeNotes;
+   	 		routeData[5] = r.vehicleType;
+   	 		routeData[6] = r.vehicleCapacity;
+   	 		routeData[7] = (r.captureTime != null ) ? r.captureTime.toGMTString() : "";
+   	 		
+   	 		rotuesCsvWriter.writeNext(routeData);
+  
+   	 		List<TripPatternStop> stops = TripPatternStop.find("pattern.route = ?", r).fetch();
+   	 		
+   	 		for(TripPatternStop s : stops) {
+   	 		
+   	 			String[] stopData = new String[stopsHeader.length];
+   	 			
+   	 			stopData[0] = r.id.toString();
+   	 			stopData[1] = s.stopSequence.toString();
+   	 			stopData[2] = "" + s.stop.location.getCoordinate().y;
+   	 			stopData[3] = "" + s.stop.location.getCoordinate().x;
+   	 			stopData[4] = "" + s.defaultTravelTime;
+   	 			stopData[5] = "" + s.defaultDwellTime;
+   	 			stopData[6] = "" + s.board;
+   	 			stopData[7] = "" + s.alight;
+   	 			
+   	 			stopsCsvWriter.writeNext(stopData);
+   	 			
+   	 		}
+   	 	}
+		   	 	
+   	 	rotuesCsvWriter.flush();
+   	 	rotuesCsvWriter.close();
+   	 	
+   	 	stopsCsvWriter.flush();
+   	 	stopsCsvWriter.close();
+   	 	
+   	 	DirectoryZip.zip(outputDirectory, outputZipFile);
+   	 	FileUtils.deleteDirectory(outputDirectory); 
+   	 	
+   	 	redirect("/public/data/exports/" + unitId + ".zip");
+    }
 }

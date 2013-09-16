@@ -3,12 +3,9 @@
 
 <div class="container">
 <div class="row" style="height: 200px;">&nbsp;</div>
-  <div class="row">
-    <div class="offset4 span4">
-     <div class="well" style="padding: 30px;">
-     	
-     <div style="width: 350px;">
-     <img class="pull-left" src="@{'public/images/app_logo_white.png'}"/><h2>TransitWand</h2></span>
+    <div class="offset3 span6">
+     <div class="well" style="padding: 15px;">
+     	<img class="pull-left" src="@{'public/images/app_logo_white.png'}"/><h2>TransitWand</h2>
 	     <div style="padding-left: 120px;" class="control-group #{if invalid}error#{/if}"> 
 		     <form id="loginForm" action="@{Application.view}" method="GET">
 		      <input name="unitId" type="text" style="margin-top: 10px; width: 150px"  placeholder="Six-digit mobile unit id"/>
@@ -16,17 +13,16 @@
 		      <button class="btn btn-primary">View Data &raquo;</button>
 		     </form>		
 		</div>
-	</div>
-     <hr style="margin: 5px 0;">
-     <p>TransitWand is an open source web and mobile application for collecting transit data. Use it to create GTFS feeds, capture passenger counts or generate GIS datasets.</p><p>To get started, download the Android <a href="https://play.google.com/store/apps/details?id=com.conveyal.transitwand"/>mobile application</a> on a compatible smartphone.</p>
+	 <hr style="margin: 5px 0;">
+     
+     <p>TransitWand is an <a href="https://github.com/conveyal/transit-wand">open source</a> web and mobile application for collecting transit data. Use it to create GTFS feeds, capture passenger counts or generate GIS datasets.</p><p>To get started, download the Android <a href="https://play.google.com/store/apps/details?id=com.conveyal.transitwand"/>mobile application</a> on a compatible smartphone.</p>
      
      <a href="https://play.google.com/store/apps/details?id=com.conveyal.transitwand"><img src="@{'public/images/en_app_rgb_wo_45.png'}" class="pull-right"/></a>
       <br clear="all"/>
-     </div>
+	</div>
+     
     </div>
-  </div>
 </div>
-
 <script>
 
 $(document).ready(function() {

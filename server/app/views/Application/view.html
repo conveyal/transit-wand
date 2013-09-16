@@ -39,7 +39,7 @@ Travel Time: {{minutes}}:{{remainder}}
 		</select>
 
 		<div style="margin: 10px;" id="patternDetails"></div>
-		<button class="btn disabled">Export GTFS</button>
+		<a class="btn" href="@{Application.exportCsv( p.unitId )}">Export CSV</a>
 		<button class="btn" id="exportShapefile">Export Shapefile</button>
 
 	</div>
