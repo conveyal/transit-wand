@@ -24,7 +24,7 @@ function loadPattern() {
 
 function exportShapefile() {
 	
-	window.location.href = '/public/data/export/pattern_' + $('#patternSelector').val() + '.zip';
+	window.location.href = '/public/data/exports/pattern_' + $('#patternSelector').val() + '.zip';
 }
 
 $(document).ready(function() {
