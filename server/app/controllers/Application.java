@@ -32,6 +32,7 @@ import com.google.gson.GsonBuilder;
 import models.*;
 import models.transit.Agency;
 import models.transit.Route;
+import models.transit.RoutePoint;
 import models.transit.RouteType;
 import models.transit.Stop;
 import models.transit.TripPattern;
@@ -45,8 +46,19 @@ public class Application extends Controller {
         render(invalid);
     }
     
-    public static void export(Long patternId) throws InterruptedException {
-    	ProcessGisExport gisExport = new ProcessGisExport(patternId);
+    public static void export(String unitId) throws InterruptedException {
+
+        Phone p = Phone.find("unitId = ?", unitId).first();
+
+        List<TripPattern> tripPatterns =  TripPattern.find("route.phone = ?", p).fetch();
+
+        ArrayList<Long>  patternIds = new ArrayList<Long>();
+
+        for(TripPattern pattern : tripPatterns) {
+            patternIds.add(pattern.id);
+        }
+
+    	ProcessGisExport gisExport = new ProcessGisExport(patternIds, unitId.toString());
     	gisExport.doJob();
     	ok();
     }
@@ -54,10 +66,10 @@ public class Application extends Controller {
     public static void exportAll() throws InterruptedException {
     	
     	List<TripPattern> tripPatterns =  TripPattern.findAll();
-    	for(TripPattern tp: tripPatterns) {
+    	/*for(TripPattern tp: tripPatterns) {
     		ProcessGisExport gisExport = new ProcessGisExport(tp.id);
     		gisExport.doJob();
-    	}
+    	}*/
     	
     	ok();
     }
@@ -73,7 +85,9 @@ public class Application extends Controller {
     public static void upload(String imei, File data) {
     	
     	try {
-			
+    		
+    		data.renameTo(new File(Play.configuration.getProperty("application.dataDirectory"), imei + "_" + new Date().getTime() + ".pb"));
+ 
 			byte[] dataFrame = new byte[(int)data.length()];;
 			DataInputStream dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(data)));
 		
@@ -96,12 +110,18 @@ public class Application extends Controller {
 				Route route = new Route("", r.getRouteName(), RouteType.BUS, r.getRouteDescription(),  a);
 				route.phone = phone;
 				route.routeNotes = r.getRouteNotes();
+				route.vehicleCapacity = r.getVehicleCapacity();
+				route.vehicleType = r.getVehicleType();
+				route.captureTime = new Date(r.getStartTime());
 				route.save();
 				
 				List<String> points = new ArrayList<String>();
 	        	
+				Integer pointSequence = 1;
 	        	for(Upload.Route.Point p : r.getPointList()) {
 	        		points.add(new Double(p.getLon()).toString() + " " + new Double(p.getLat()).toString());
+	        		RoutePoint.addRoutePoint(p, route.id, pointSequence);
+	        		pointSequence++;
 	        	}
 	        	
 	        	String linestring = "LINESTRING(" + StringUtils.join(points, ", ") + ")";
@@ -132,8 +152,8 @@ public class Application extends Controller {
 	        		sequenceId++;
 	        	}	   
 	        	
-	        	ProcessGisExport gisExport = new ProcessGisExport(tp.id);
-	        	gisExport.doJob();
+	        	//ProcessGisExport gisExport = new ProcessGisExport(tp.id);
+	        	//gisExport.doJob();
 			}
 			
 			Logger.info("Routes uploaded: " + upload.getRouteList().size());

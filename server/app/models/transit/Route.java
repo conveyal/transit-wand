@@ -1,6 +1,7 @@
 package models.transit;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EnumType;
@@ -35,6 +36,11 @@ public class Route extends Model {
     public String routeUrl;
     public String routeColor;
     public String routeTextColor;
+    
+    public String vehicleCapacity;
+    public String vehicleType;
+    
+    public Date captureTime;
 
     // Custom Fields
     public Boolean airCon;

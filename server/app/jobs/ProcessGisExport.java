@@ -86,26 +86,19 @@ import utils.FeatureAttributeFormatter;
 
 public class ProcessGisExport extends Job {
 
-	private Long _patternId;
+	private List<Long> _patternIds;
+    private String _phone;
 
 	
-	public ProcessGisExport(Long patternId)
+	public ProcessGisExport(List<Long> patternIds, String phone)
 	{
-		this._patternId = patternId;
+		this._patternIds = patternIds;
+        this._phone = phone;
 	}
 	
 	public void doJob() throws InterruptedException {
 		
-		String exportName = "pattern_" + this._patternId;
-		
-		TripPattern pattern = null;
-		while(pattern == null)
-    	{
-			Thread.sleep(1000);
-			pattern = TripPattern.findById(this._patternId);
-    		
-    		Logger.info("Waiting for TripPattern object...");
-    	}
+		String exportName = "export_" + _phone;
 		
 		File outputZipFile = new File(Play.configuration.getProperty("application.publicGisDataDirectory"), exportName + ".zip");
 		
@@ -117,6 +110,10 @@ public class ProcessGisExport extends Job {
         	{
         		outputDirectory.mkdir();
         	}
+
+            if(outputZipFile.exists()) {
+                outputZipFile.delete();
+            }
         	
         	processStops(outputDirectory, exportName);
         	processRoute(outputDirectory, exportName);
@@ -149,6 +146,7 @@ public class ProcessGisExport extends Job {
                 "Stop",                 
                 "location:Point:srid=4326," + 
                 "id:String," +
+                "routeId:String," +
                 "sequence:Integer," +
                 
                 "travelTime:Integer," +
@@ -165,34 +163,38 @@ public class ProcessGisExport extends Job {
         
     	dataStore.createSchema(STOP_TYPE);
     	featureBuilder = new SimpleFeatureBuilder(STOP_TYPE);
+
+        for(Long patternId : this._patternIds) { 
     	
-    	TripPattern tp = TripPattern.findById(this._patternId);
-    	
-		List<TripPatternStop> patternStops = TripPatternStop.find("pattern = ? order by stopSequence", tp).fetch();
-		
-		Integer cumulativeTime = 0;
-		
-		for(TripPatternStop tps : patternStops)
-    	{
-    		featureBuilder.add(tps.stop.location);
+        	TripPattern tp = TripPattern.findById(patternId);
+        	
+    		List<TripPatternStop> patternStops = TripPatternStop.find("pattern = ? order by stopSequence", tp).fetch();
     		
-            featureBuilder.add(tps.stop.id.toString());
-            featureBuilder.add(tps.stopSequence);
-            
-            featureBuilder.add(tps.defaultTravelTime);
-            featureBuilder.add(tps.defaultDwellTime);
-            
-            if(tps.defaultTravelTime != null)
-            cumulativeTime += tps.defaultTravelTime;
-            featureBuilder.add(cumulativeTime);
-            
-            if(tps.defaultDwellTime != null)
-            cumulativeTime += tps.defaultDwellTime;
-            featureBuilder.add(cumulativeTime);
-            
-            SimpleFeature feature = featureBuilder.buildFeature(null);
-            collection.add(feature);	
-    	}
+    		Integer cumulativeTime = 0;
+    		
+    		for(TripPatternStop tps : patternStops)
+        	{
+        		featureBuilder.add(tps.stop.location);
+        		
+                featureBuilder.add(tps.stop.id.toString());
+                featureBuilder.add(tp.id.toString());
+                featureBuilder.add(tps.stopSequence);
+                
+                featureBuilder.add(tps.defaultTravelTime);
+                featureBuilder.add(tps.defaultDwellTime);
+                
+                if(tps.defaultTravelTime != null)
+                cumulativeTime += tps.defaultTravelTime;
+                featureBuilder.add(cumulativeTime);
+                
+                if(tps.defaultDwellTime != null)
+                cumulativeTime += tps.defaultDwellTime;
+                featureBuilder.add(cumulativeTime);
+                
+                SimpleFeature feature = featureBuilder.buildFeature(null);
+                collection.add(feature);	
+        	}
+        }
     
         Transaction transaction = new DefaultTransaction("create");
 
@@ -244,20 +246,24 @@ public class ProcessGisExport extends Job {
         SimpleFeatureBuilder featureBuilder = null;
         
         dataStore.createSchema(ROUTE_TYPE);
-       	featureBuilder = new SimpleFeatureBuilder(ROUTE_TYPE);
+       	
+        featureBuilder = new SimpleFeatureBuilder(ROUTE_TYPE);
     	
-       	TripPattern tp = TripPattern.findById(this._patternId);
-		
-       	if(tp.shape == null)
-			return;
-	
-		featureBuilder.add(tp.shape.shape);
-		featureBuilder.add(tp.name);
-	    featureBuilder.add(tp.route.routeDesc);
-	    featureBuilder.add(tp.route.routeNotes);
-	      
-        SimpleFeature feature = featureBuilder.buildFeature(null);
-        collection.add(feature);	
+        for(Long patternId : this._patternIds) {
+
+           	TripPattern tp = TripPattern.findById(patternId);
+    		
+           	if(tp.shape == null)
+    			return;
+    	
+    		featureBuilder.add(tp.shape.shape);
+    		featureBuilder.add(tp.name);
+    	    featureBuilder.add(tp.route.routeDesc);
+    	    featureBuilder.add(tp.route.routeNotes);
+    	      
+            SimpleFeature feature = featureBuilder.buildFeature(null);
+            collection.add(feature);	
+        }
     	
         Transaction transaction = new DefaultTransaction("create");
 
