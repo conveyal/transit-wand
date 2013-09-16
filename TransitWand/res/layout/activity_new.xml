@@ -87,7 +87,7 @@
 	         android:layout_width="match_parent"
 	         android:layout_height="wrap_content"
 	         android:ems="10"
-	         android:imeOptions="actionDone"
+	         android:imeOptions="actionNext"
 	         android:maxLines="1"
 	         android:minLines="1"
 	         android:singleLine="true" />
@@ -102,6 +102,10 @@
 	         android:id="@+id/vehicleType"
 	         android:layout_width="match_parent"
 	         android:layout_height="wrap_content"
+	         android:imeOptions="actionNext"
+	         android:maxLines="1"
+	         android:minLines="1"
+	         android:singleLine="true"
 	         android:ems="10" >
 
 	         <requestFocus />
@@ -117,6 +121,8 @@
 	         android:id="@+id/vehicleCapacity"
 	         android:layout_width="match_parent"
 	         android:layout_height="wrap_content"
+	         android:imeOptions="actionDone"
+	         
 	         android:ems="10"
 	         android:inputType="number" />
 
