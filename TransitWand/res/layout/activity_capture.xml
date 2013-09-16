@@ -41,7 +41,7 @@
         android:textColor="#aaa" />
     
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/uploadText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/notesText"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignRight="@+id/notesText"
-        android:layout_below="@+id/textView4"
+        android:layout_below="@+id/uploadText"
         android:layout_marginTop="5dp"
         android:text="Stops:"
         android:textColor="#aaa" />
@@ -134,8 +134,8 @@
         android:id="@+id/distanceText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView4"
-        android:layout_toRightOf="@+id/textView4"
+        android:layout_alignBottom="@+id/uploadText"
+        android:layout_toRightOf="@+id/uploadText"
         android:text="distanceText" />
 
     <TextView

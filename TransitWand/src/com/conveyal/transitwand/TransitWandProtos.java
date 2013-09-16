@@ -73,6 +73,14 @@ public final class TransitWandProtos {
       // optional string route_notes = 6;
       boolean hasRouteNotes();
       String getRouteNotes();
+      
+      // optional string vehicle_type = 7;
+      boolean hasVehicleType();
+      String getVehicleType();
+      
+      // optional string vehicle_capacity = 8;
+      boolean hasVehicleCapacity();
+      String getVehicleCapacity();
     }
     public static final class Route extends
         com.google.protobuf.GeneratedMessageLite
@@ -1238,6 +1246,70 @@ public final class TransitWandProtos {
         }
       }
       
+      // optional string vehicle_type = 7;
+      public static final int VEHICLE_TYPE_FIELD_NUMBER = 7;
+      private java.lang.Object vehicleType_;
+      public boolean hasVehicleType() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public String getVehicleType() {
+        java.lang.Object ref = vehicleType_;
+        if (ref instanceof String) {
+          return (String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+            vehicleType_ = s;
+          }
+          return s;
+        }
+      }
+      private com.google.protobuf.ByteString getVehicleTypeBytes() {
+        java.lang.Object ref = vehicleType_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+          vehicleType_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      
+      // optional string vehicle_capacity = 8;
+      public static final int VEHICLE_CAPACITY_FIELD_NUMBER = 8;
+      private java.lang.Object vehicleCapacity_;
+      public boolean hasVehicleCapacity() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public String getVehicleCapacity() {
+        java.lang.Object ref = vehicleCapacity_;
+        if (ref instanceof String) {
+          return (String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+            vehicleCapacity_ = s;
+          }
+          return s;
+        }
+      }
+      private com.google.protobuf.ByteString getVehicleCapacityBytes() {
+        java.lang.Object ref = vehicleCapacity_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+          vehicleCapacity_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      
       private void initFields() {
         startTime_ = 0L;
         point_ = java.util.Collections.emptyList();
@@ -1245,6 +1317,8 @@ public final class TransitWandProtos {
         routeName_ = "";
         routeDescription_ = "";
         routeNotes_ = "";
+        vehicleType_ = "";
+        vehicleCapacity_ = "";
       }
       private byte memoizedIsInitialized = -1;
       public final boolean isInitialized() {
@@ -1292,6 +1366,12 @@ public final class TransitWandProtos {
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
           output.writeBytes(6, getRouteNotesBytes());
         }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          output.writeBytes(7, getVehicleTypeBytes());
+        }
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          output.writeBytes(8, getVehicleCapacityBytes());
+        }
       }
       
       private int memoizedSerializedSize = -1;
@@ -1323,6 +1403,14 @@ public final class TransitWandProtos {
         if (((bitField0_ & 0x00000008) == 0x00000008)) {
           size += com.google.protobuf.CodedOutputStream
             .computeBytesSize(6, getRouteNotesBytes());
+        }
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(7, getVehicleTypeBytes());
+        }
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(8, getVehicleCapacityBytes());
         }
         memoizedSerializedSize = size;
         return size;
@@ -1438,6 +1526,10 @@ public final class TransitWandProtos {
           bitField0_ = (bitField0_ & ~0x00000010);
           routeNotes_ = "";
           bitField0_ = (bitField0_ & ~0x00000020);
+          vehicleType_ = "";
+          bitField0_ = (bitField0_ & ~0x00000040);
+          vehicleCapacity_ = "";
+          bitField0_ = (bitField0_ & ~0x00000080);
           return this;
         }
         
@@ -1497,6 +1589,14 @@ public final class TransitWandProtos {
             to_bitField0_ |= 0x00000008;
           }
           result.routeNotes_ = routeNotes_;
+          if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+            to_bitField0_ |= 0x00000010;
+          }
+          result.vehicleType_ = vehicleType_;
+          if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+            to_bitField0_ |= 0x00000020;
+          }
+          result.vehicleCapacity_ = vehicleCapacity_;
           result.bitField0_ = to_bitField0_;
           return result;
         }
@@ -1534,6 +1634,12 @@ public final class TransitWandProtos {
           }
           if (other.hasRouteNotes()) {
             setRouteNotes(other.getRouteNotes());
+          }
+          if (other.hasVehicleType()) {
+            setVehicleType(other.getVehicleType());
+          }
+          if (other.hasVehicleCapacity()) {
+            setVehicleCapacity(other.getVehicleCapacity());
           }
           return this;
         }
@@ -1605,6 +1711,16 @@ public final class TransitWandProtos {
               case 50: {
                 bitField0_ |= 0x00000020;
                 routeNotes_ = input.readBytes();
+                break;
+              }
+              case 58: {
+                bitField0_ |= 0x00000040;
+                vehicleType_ = input.readBytes();
+                break;
+              }
+              case 66: {
+                bitField0_ |= 0x00000080;
+                vehicleCapacity_ = input.readBytes();
                 break;
               }
             }
@@ -1917,6 +2033,78 @@ public final class TransitWandProtos {
         void setRouteNotes(com.google.protobuf.ByteString value) {
           bitField0_ |= 0x00000020;
           routeNotes_ = value;
+          
+        }
+        
+        // optional string vehicle_type = 7;
+        private java.lang.Object vehicleType_ = "";
+        public boolean hasVehicleType() {
+          return ((bitField0_ & 0x00000040) == 0x00000040);
+        }
+        public String getVehicleType() {
+          java.lang.Object ref = vehicleType_;
+          if (!(ref instanceof String)) {
+            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+            vehicleType_ = s;
+            return s;
+          } else {
+            return (String) ref;
+          }
+        }
+        public Builder setVehicleType(String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+          vehicleType_ = value;
+          
+          return this;
+        }
+        public Builder clearVehicleType() {
+          bitField0_ = (bitField0_ & ~0x00000040);
+          vehicleType_ = getDefaultInstance().getVehicleType();
+          
+          return this;
+        }
+        void setVehicleType(com.google.protobuf.ByteString value) {
+          bitField0_ |= 0x00000040;
+          vehicleType_ = value;
+          
+        }
+        
+        // optional string vehicle_capacity = 8;
+        private java.lang.Object vehicleCapacity_ = "";
+        public boolean hasVehicleCapacity() {
+          return ((bitField0_ & 0x00000080) == 0x00000080);
+        }
+        public String getVehicleCapacity() {
+          java.lang.Object ref = vehicleCapacity_;
+          if (!(ref instanceof String)) {
+            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+            vehicleCapacity_ = s;
+            return s;
+          } else {
+            return (String) ref;
+          }
+        }
+        public Builder setVehicleCapacity(String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+          vehicleCapacity_ = value;
+          
+          return this;
+        }
+        public Builder clearVehicleCapacity() {
+          bitField0_ = (bitField0_ & ~0x00000080);
+          vehicleCapacity_ = getDefaultInstance().getVehicleCapacity();
+          
+          return this;
+        }
+        void setVehicleCapacity(com.google.protobuf.ByteString value) {
+          bitField0_ |= 0x00000080;
+          vehicleCapacity_ = value;
           
         }
         

@@ -19,6 +19,10 @@ public class RouteCapture {
 	public String description;
 	public String notes;
 	
+	public String vehicleType;
+	public String vehicleCapacity;
+	
+	public long startMs;
 	public long startTime;
 	public long stopTime;
 	
@@ -47,6 +51,8 @@ public class RouteCapture {
 		route.name = r.getRouteName();
 		route.description = r.getRouteDescription();
 		route.notes = r.getRouteNotes();
+		route.vehicleCapacity = r.getVehicleCapacity();
+		route.vehicleType = r.getVehicleType();
 		
 		route.startTime = r.getStartTime();
 		
@@ -57,7 +63,7 @@ public class RouteCapture {
 			 rp.location = new Location("GPS");
 			 rp.location.setLatitude(p.getLat());
 			 rp.location.setLongitude(p.getLon());
-			 rp.time = p.getTimeoffset() + lastTimepoint;
+			 rp.time = (p.getTimeoffset() * 1000) + lastTimepoint;
 			 
 			 lastTimepoint = rp.time;
 			 
@@ -71,8 +77,8 @@ public class RouteCapture {
 			 rs.location = new Location("GPS");
 			 rs.location.setLatitude(s.getLat());
 			 rs.location.setLongitude(s.getLon());
-			 rs.arrivalTime = s.getArrivalTimeoffset() + lastTimepoint;
-			 rs.departureTime = s.getDepartureTimeoffset()  + lastTimepoint;
+			 rs.arrivalTime = (s.getArrivalTimeoffset() * 1000) + lastTimepoint;
+			 rs.departureTime = (s.getDepartureTimeoffset() * 1000)  + lastTimepoint;
 			 
 			 lastTimepoint = rs.arrivalTime;
 			 
@@ -92,9 +98,11 @@ public class RouteCapture {
 		route.setRouteName(name);
 		route.setRouteDescription(description);
 		route.setRouteNotes(notes);
+		route.setVehicleCapacity(vehicleCapacity);
+		route.setVehicleType(vehicleType);
 		route.setStartTime(startTime);
 		
-		long lastTimepoint = startTime; 
+		long lastTimepoint = startMs; 
 		
 		for(RoutePoint rp : points){
 			Upload.Route.Point.Builder point = Upload.Route.Point.newBuilder();
@@ -106,7 +114,7 @@ public class RouteCapture {
 			route.addPoint(point);
 		}
 		
-		lastTimepoint = startTime; 
+		lastTimepoint = startMs; 
 		
 		for(RouteStop rs : stops){
 			

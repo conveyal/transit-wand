@@ -132,7 +132,7 @@ public class CaptureService extends Service {
     	
     }
     
-    public  void newCapture(String name, String description, String notes) {
+    public  void newCapture(String name, String description, String notes, String vehicleType, String vehicleCapacity) {
     	
     	startGps();
     	
@@ -155,6 +155,8 @@ public class CaptureService extends Service {
 	    	currentCapture.setRouteName(name);
 	    	currentCapture.description = description;
 	    	currentCapture.notes = notes;
+	    	currentCapture.vehicleCapacity = vehicleCapacity;
+	    	currentCapture.vehicleType = vehicleType;
     	}
     }
    
@@ -163,8 +165,9 @@ public class CaptureService extends Service {
     	
     	showNotificationTray();
     	
-    	if(currentCapture != null) { 
-    		currentCapture.startTime = SystemClock.elapsedRealtime();
+    	if(currentCapture != null) {
+    		currentCapture.startTime = new Date().getTime();
+    		currentCapture.startMs = SystemClock.elapsedRealtime();
     		capturing = true;
     	}
     	else {
@@ -227,7 +230,7 @@ public class CaptureService extends Service {
     		
     		if(currentStop == null) {
         		currentStop = new RouteStop();
-        		currentStop.arrivalTime = SystemClock.elapsedRealtime();
+        		currentStop.arrivalTime = SystemClock.elapsedRealtime(); 
         		currentStop.location = lastLocation;
         	}
     		

@@ -97,7 +97,7 @@
             android:layout_alignLeft="@+id/routeCountText" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/uploadText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView3"

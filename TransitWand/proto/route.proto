@@ -31,7 +31,9 @@ message Upload {
 	  
 	  optional string route_name = 4;
 	  optional string route_description = 5;
-	  optional string route_notes = 6;  
+	  optional string route_notes = 6;
+	  optional string vehicle_type = 7;
+	  optional string vehicle_capacity = 8;  
 	  
 	}
 

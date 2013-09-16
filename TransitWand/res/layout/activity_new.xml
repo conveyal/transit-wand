@@ -88,9 +88,37 @@
 	         android:layout_height="wrap_content"
 	         android:ems="10"
 	         android:imeOptions="actionDone"
-	         android:singleLine="true"
 	         android:maxLines="1"
-	         android:minLines="1" />
+	         android:minLines="1"
+	         android:singleLine="true" />
+
+	     <TextView
+	         android:id="@+id/textView1"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:text="Vehicle Type (optional):" />
+
+	     <EditText
+	         android:id="@+id/vehicleType"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:ems="10" >
+
+	         <requestFocus />
+	     </EditText>
+
+	     <TextView
+	         android:id="@+id/textView2"
+	         android:layout_width="wrap_content"
+	         android:layout_height="wrap_content"
+	         android:text="Vehicle Capacity (optional):" />
+
+	     <EditText
+	         android:id="@+id/vehicleCapacity"
+	         android:layout_width="match_parent"
+	         android:layout_height="wrap_content"
+	         android:ems="10"
+	         android:inputType="number" />
 
 	     <Button
 	         android:id="@+id/ContinueButton"

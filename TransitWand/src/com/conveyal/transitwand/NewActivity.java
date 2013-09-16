@@ -87,8 +87,10 @@ public class NewActivity extends Activity {
 			EditText routeName = (EditText) findViewById(R.id.routeName);
 			EditText routeDescription = (EditText) findViewById(R.id.routeDescription);
 			EditText fieldNotes = (EditText) findViewById(R.id.fieldNotes);
+			EditText vehicleCapacity = (EditText) findViewById(R.id.vehicleCapacity);
+			EditText vehicleType = (EditText) findViewById(R.id.vehicleType);
 
-			captureService.newCapture(routeName.getText().toString(), routeDescription.getText().toString(), fieldNotes.getText().toString());			
+			captureService.newCapture(routeName.getText().toString(), routeDescription.getText().toString(), fieldNotes.getText().toString(), vehicleType.getText().toString(), vehicleCapacity.getText().toString());			
 		}		
 	}
 	
@@ -96,14 +98,17 @@ public class NewActivity extends Activity {
 		
 		synchronized(this)	{ 
 			
-		
 			EditText routeName = (EditText) findViewById(R.id.routeName);
 			EditText routeDescription = (EditText) findViewById(R.id.routeDescription);
 			EditText fieldNotes = (EditText) findViewById(R.id.fieldNotes);
+			EditText vehicleCapacity = (EditText) findViewById(R.id.vehicleCapacity);
+			EditText vehicleType = (EditText) findViewById(R.id.vehicleType);
 			
 			captureService.currentCapture.setRouteName(routeName.getText().toString());
 			captureService.currentCapture.description = routeDescription.getText().toString();
 			captureService.currentCapture.notes = fieldNotes.getText().toString();
+			captureService.currentCapture.vehicleCapacity = vehicleCapacity.getText().toString();
+			captureService.currentCapture.vehicleType = vehicleType.getText().toString();
 		}		
 	}
 

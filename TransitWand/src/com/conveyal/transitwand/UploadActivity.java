@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -58,15 +59,12 @@ public class UploadActivity extends Activity {
 			
 			try {
 				dataInputStream = new DataInputStream(new BufferedInputStream(new FileInputStream(f)));
-			
-			//	byte[] dataFrame = new byte[(int)f.length()];;
-				
-			//	dataInputStream.read(dataFrame);
 				
 				Upload.Route pbRouteData = Upload.Route.parseDelimitedFrom(dataInputStream);
 				
+				dataInputStream.close();
+				
 				uploadBuilder.addRoute(pbRouteData);
-			
 			
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
@@ -128,8 +126,15 @@ public class UploadActivity extends Activity {
 				    	params.put("imei", CaptureService.imei);
 				    	params.put("data", dataStream);
 				    
+						try {
+							dataStream.close();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 				    	
 						AsyncHttpClient client = new AsyncHttpClient();
+						client.setTimeout(240 * 1000);
 						client.setUserAgent("tw");
 						client.post(CaptureService.URL_BASE + "upload", params,  new AsyncHttpResponseHandler() {
 						    
@@ -160,6 +165,9 @@ public class UploadActivity extends Activity {
 						    }
 						    
 						    public void onFailure(Throwable error, String content) {
+						    	
+						    	Log.e("upload", "Upload failed: " + error + " " + content);
+						    
 						    	
 						    	ProgressBar progressSpinner = (ProgressBar) findViewById(R.id.progressBar);
 								progressSpinner.setVisibility(View.GONE);
