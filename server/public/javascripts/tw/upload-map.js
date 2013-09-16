@@ -23,9 +23,8 @@ function loadPattern() {
 }
 
 function exportShapefile() {
-
-
-	window.location.href = '/public/gis/pattern_' + $('#patternSelector').val() + '.zip';
+	
+	window.location.href = '/public/data/export/pattern_' + $('#patternSelector').val() + '.zip';
 }
 
 $(document).ready(function() {
