@@ -26,11 +26,7 @@ import org.onebusaway.gtfs.serialization.GtfsWriter;
 import com.mchange.v2.c3p0.impl.DbAuth;
 import com.vividsolutions.jts.geom.Coordinate;
 
-import models.gtfs.GtfsSnapshotExport;
-import models.gtfs.GtfsSnapshotExportStatus;
-import models.gtfs.GtfsSnapshotMerge;
-import models.gtfs.GtfsSnapshotMergeTask;
-import models.gtfs.GtfsSnapshotMergeTaskStatus;
+
 import models.transit.Agency;
 import models.transit.Route;
 import models.transit.ServiceCalendar;
@@ -60,7 +56,7 @@ public class ProcessGtfsSnapshotExport extends Job {
 	
 	public void doJob() {
 		
-		GtfsSnapshotExport snapshotExport = null;
+		/* GtfsSnapshotExport snapshotExport = null;
 		while(snapshotExport == null)
 		{
 			snapshotExport = GtfsSnapshotExport.findById(this._gtfsSnapshotExportId);
@@ -411,7 +407,7 @@ public class ProcessGtfsSnapshotExport extends Job {
 		{
 			Logger.error("error");
 			e.printStackTrace();
-		}
+		} */
 	}
 }
 
