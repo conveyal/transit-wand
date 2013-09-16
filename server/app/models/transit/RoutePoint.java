@@ -49,11 +49,13 @@ public class RoutePoint extends Model {
     public static void addRoutePoint(Upload.Route.Point p, Long routeId, Integer sequence)
     {
     	Query idQuery = RoutePoint.em().createNativeQuery("SELECT NEXTVAL('hibernate_sequence');");
+    	BigInteger routePointId = (BigInteger)idQuery.getSingleResult();
+
 	
 		Query q = RoutePoint.em().createNativeQuery("INSERT INTO routepoint (id, route_id, sequence, lat, lon, timeoffset)" +
 	    	"  VALUES(?, ?, ?, ?, ?, ?);");
 		
-		q.setParameter(1, idQuery)
+		q.setParameter(1, routePointId.longValue())
 		 .setParameter(2, routeId)
 		 .setParameter(3, sequence)
 		 .setParameter(4, p.getLat())

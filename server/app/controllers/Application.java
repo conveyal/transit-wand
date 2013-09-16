@@ -87,6 +87,7 @@ public class Application extends Controller {
     	try {
     		
     		File pbFile = new File(Play.configuration.getProperty("application.dataDirectory"), imei + "_" + new Date().getTime() + ".pb");
+    		Logger.info(pbFile.toString());
     		data.renameTo(pbFile);
  
 			byte[] dataFrame = new byte[(int)pbFile.length()];;
