@@ -31,6 +31,7 @@ import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.provider.Settings.Secure;
 
 public class CaptureService extends Service {
 
@@ -82,10 +83,16 @@ public class CaptureService extends Service {
         
 		prefsManager = PreferenceManager.getDefaultSharedPreferences(this);
         
-        if(imei == null)
+
+		if(imei == null)
         {
         	TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
     		CaptureService.imei = telephonyManager.getDeviceId();
+    		
+    		// fall back to Secure.ANDROID_ID if IMEI isn't set -- continuing to use IMEI as primary ID mechanism for backwards compatibility
+    		if(CaptureService.imei == null || CaptureService.imei.length() == 0){
+    			CaptureService.imei = Secure.getString(getBaseContext().getContentResolver(),Secure.ANDROID_ID); 
+    		}
         }
     }
 
