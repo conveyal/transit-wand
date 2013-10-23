@@ -14,6 +14,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.persistence.EntityManager;
@@ -241,19 +242,29 @@ public class Application extends Controller {
     
     public static void exportCsv(String unitId) throws IOException {
     	
-		Phone p = Phone.find("unitId = ?", unitId).first();
-		
-		if(p == null)
-			index(true);
-		
-		List<Route> routes = Route.find("phone = ?", p).fetch();
-		
-		File outputDirectory = new File(Play.configuration.getProperty("application.exportDataDirectory"), unitId);
-		File outputZipFile = new File(Play.configuration.getProperty("application.exportDataDirectory"), unitId + ".zip");
+    	ArrayList<Route> routes = new ArrayList<Route>();
+    	
+    	String[] unitIds = unitId.split(",");
+    	
+    	for(String id : unitIds) {
+    		
+    		Phone p = Phone.find("unitId = ?", id).first();
+   		
+    		List<Route> unitRouteList = Route.find("phone = ?", p).fetch();
+    		
+    		routes.addAll(unitRouteList);
+    	}
+    	
+    	
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
+    	String timestamp = sdf.format(new Date());
+    	
+		File outputDirectory = new File(Play.configuration.getProperty("application.exportDataDirectory"), timestamp);
+		File outputZipFile = new File(Play.configuration.getProperty("application.exportDataDirectory"), timestamp + ".zip");
 		
 		// write routes
-		File routesFile = new File(outputDirectory, unitId + "_routes.csv");
-		File stopsFile = new File(outputDirectory, unitId + "_stops.csv");
+		File routesFile = new File(outputDirectory, timestamp + "_routes.csv");
+		File stopsFile = new File(outputDirectory, timestamp + "_stops.csv");
 		
 		if(!outputDirectory.exists())
     	{
@@ -280,7 +291,7 @@ public class Application extends Controller {
    	 	for(Route r : routes) {
    	 		
    	 		String[] routeData = new String[routesHeader.length];
-   	 		routeData[0] = unitId;
+   	 		routeData[0] = r.phone.unitId;
    	 		routeData[1] = r.id.toString();
    	 		routeData[2] = r.routeLongName;
    	 		routeData[3] = r.routeDesc;
@@ -320,6 +331,6 @@ public class Application extends Controller {
    	 	DirectoryZip.zip(outputDirectory, outputZipFile);
    	 	FileUtils.deleteDirectory(outputDirectory); 
    	 	
-   	 	redirect("/public/data/exports/" + unitId + ".zip");
+   	 	redirect("/public/data/exports/" + timestamp + ".zip");
     }
 }
