@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TransitWand</string>
+    <string name="action_settings">Configuración</string>
+
+	<string name="capture">Capturar</string>
+	<string name="review">Revisar</string>
+	<string name="upload">Subir</string>
+	<string name="upload_data">Subir datos</string>
+	<string name="distance">Distancia:</string>
+	<string name="stops">Paradas:</string>
+	<string name="duration">Duración:</string>
+	<string name="passengers">Pasajeros</string>
+	<string name="routes">Ruta:</string>
+	<string name="route_name">Nombre de la ruta</string>
+
+	<string name="route_name_optional">Nombre de la ruta (opcional):</string>
+	<string name="route_description_optional">Descripción de la ruta (opcional):</string>
+	<string name="field_notes_optional">Notas del viaje (opcional):</string>
+	<string name="vehicle_type_optional">Tipo de vehículo (opcional):</string>
+	<string name="vehicle_capacity_optional">Capacidad del vehículo (opcional):</string>
+	<string name="username_optional">Apodo (opcional):</string>
+
+    <string name="gps_pending">GPS en espera</string>
+
+	<string name="starting_capture">Iniciando captura...</string>
+	<string name="finish_capturing">¿Quieres finalizar la captura?</string>
+	<string name="capture_complete">Captura completa.</string>
+	<string name="no_data_collected">No hay datos recogidos, cancelando.</string>
+	<string name="unable_to_record">No fue posible registrar la parada: GPS en espera bloqueado.</string>
+	<string name="review_captured_data">Revisar los datos capturados</string>
+	<string name="data_size">Tamaño de los datos:</string>
+	<string name="no_data_upload">No hay datos para subir.</string>
+	<string name="data_uploaded">Datos subidos.</string>
+	<string name="unable_to_upload">No fue posible subir los datos, revisa la conexión a internet.</string>
+	<string name="no_data_review">No hay datos para revisar.</string>
+
+	<string name="stop_departure">Detener la salida</string>
+	<string name="stop_arrival">Detener la llegada</string>
+
+	<string name="you_want_delete_route">¿Quieres borrar está ruta?</string>
+
+	<string name="register_phone">Registrar teléfono</string>
+	<string name="phone_registered">Teléfono registrado.</string>
+	<string name="unable_to_register">No fue posible registrar el teléfono, revisa la conexión a internet.</string>
+
+	<string name="start">Iniciar</string>
+	<string name="finish">Terminar</string>
+	<string name="continue">Continuar</string>
+	<string name="register">Registrar</string>
+    <string name="yes">Si</string>
+    <string name="no">No</string>
+    <string name="kb">Kb</string>
+    <string name="mb">Mb</string>
+
+</resources>
