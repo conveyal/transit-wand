@@ -43,7 +43,7 @@ public class ReviewActivity extends Activity {
 		setContentView(R.layout.activity_review);
 		
 		if(getFilesDir().listFiles().length == 0) {
-			Toast.makeText(ReviewActivity.this, "No data to review.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(ReviewActivity.this, R.string.no_data_review, Toast.LENGTH_SHORT).show();
 			finish();
 			return;
 		}

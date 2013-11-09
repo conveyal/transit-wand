@@ -3,6 +3,55 @@
 
     <string name="app_name">TransitWand</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+
+	<string name="capture">Capture</string>
+	<string name="review">Review</string>
+	<string name="upload">Upload</string>
+	<string name="upload_data">Upload Data</string>
+	<string name="distance">Distance:</string>
+	<string name="stops">Stops:</string>
+	<string name="duration">Duration:</string>
+	<string name="passengers">Passengers</string>
+	<string name="routes">Routes:</string>
+	<string name="route_name">Route Name</string>
+
+	<string name="route_name_optional">Route Name (optional):</string>
+	<string name="route_description_optional">Route Description (optional):</string>
+	<string name="field_notes_optional">Field Notes (optional):</string>
+	<string name="vehicle_type_optional">Vehicle Type (optional):</string>
+	<string name="vehicle_capacity_optional">Vehicle Capacity (optional):</string>
+	<string name="username_optional">Username (optional):</string>
+
+    <string name="gps_pending">GPS Pending</string>
+
+	<string name="starting_capture">Starting capture...</string>
+	<string name="finish_capturing">Do you want to finish capturing?</string>
+	<string name="capture_complete">Capture complete.</string>
+	<string name="no_data_collected">No data collected, canceling.</string>
+	<string name="unable_to_record">Unable to record stop: GPS lock pending.</string>
+	<string name="review_captured_data">Review Captured Data</string>
+	<string name="data_size">Data Size:</string>
+	<string name="no_data_upload">No data to upload.</string>
+	<string name="data_uploaded">Data uploaded.</string>
+	<string name="unable_to_upload">Unable to upload data, check network connection.</string>
+	<string name="no_data_review">No data to review.</string>
+
+	<string name="stop_departure">Stop departure</string>
+	<string name="stop_arrival">Stop arrival</string>
+
+	<string name="you_want_delete_route">Do you want to delete this route?</string>
+
+	<string name="register_phone">Register Phone</string>
+	<string name="phone_registered">Phone registered.</string>
+	<string name="unable_to_register">Unable to register phone, check network connection.</string>
+
+	<string name="start">Start</string>
+	<string name="finish">Finish</string>
+	<string name="continue">Continue</string>
+	<string name="register">Register</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="kb">Kb</string>
+    <string name="mb">Mb</string>
 
 </resources>

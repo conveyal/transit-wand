@@ -106,8 +106,8 @@ public class CaptureActivity extends Activity implements ICaptureActivity {
 							};
 	
 							AlertDialog.Builder builder = new AlertDialog.Builder(CaptureActivity.this);
-							builder.setMessage("Do you want to finish capturing?").setPositiveButton("Yes", dialogClickListener)
-							    .setNegativeButton("No", dialogClickListener).show();
+							builder.setMessage(R.string.finish_capturing).setPositiveButton(R.string.yes, dialogClickListener)
+							    .setNegativeButton(R.string.no, dialogClickListener).show();
 							
 						}
 				
@@ -211,7 +211,7 @@ public class CaptureActivity extends Activity implements ICaptureActivity {
 			
 			vibratorService.vibrate(100);
 			
-			Toast.makeText(CaptureActivity.this, "Starting capture..." ,Toast.LENGTH_SHORT).show();
+			Toast.makeText(CaptureActivity.this, R.string.starting_capture ,Toast.LENGTH_SHORT).show();
 			
 			((Chronometer) findViewById(R.id.captureChronometer)).setBase(SystemClock.elapsedRealtime());
 			((Chronometer) findViewById(R.id.captureChronometer)).start();
@@ -227,9 +227,9 @@ public class CaptureActivity extends Activity implements ICaptureActivity {
 			vibratorService.vibrate(100);
 			
 			if(captureService.currentCapture.points.size() > 0)
-				Toast.makeText(CaptureActivity.this, "Capture complete.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(CaptureActivity.this, R.string.capture_complete, Toast.LENGTH_SHORT).show();
 			else
-				Toast.makeText(CaptureActivity.this, "No data collected, canceling.", Toast.LENGTH_SHORT).show();
+				Toast.makeText(CaptureActivity.this, R.string.no_data_collected, Toast.LENGTH_SHORT).show();
 			
 			captureService.stopCapture();
 		}
@@ -305,7 +305,7 @@ public class CaptureActivity extends Activity implements ICaptureActivity {
 					}
 					vibratorService.vibrate(25);
 					
-					Toast.makeText(CaptureActivity.this, "Stop departure", Toast.LENGTH_SHORT).show();
+					Toast.makeText(CaptureActivity.this, R.string.stop_departure, Toast.LENGTH_SHORT).show();
 				}
 				else {
 					captureService.ariveAtStop();
@@ -315,7 +315,7 @@ public class CaptureActivity extends Activity implements ICaptureActivity {
 					
 					vibratorService.vibrate(25);
 					
-					Toast.makeText(CaptureActivity.this, "Stop arrival", Toast.LENGTH_SHORT).show();
+					Toast.makeText(CaptureActivity.this, R.string.stop_arrival, Toast.LENGTH_SHORT).show();
 				}
 				
 				updatePassengerCountDisplay();
@@ -323,7 +323,7 @@ public class CaptureActivity extends Activity implements ICaptureActivity {
 				updateStopCount();
 			} 
 			catch(NoGPSFixException e) {
-				 Toast.makeText(CaptureActivity.this, "Unable to record stop: GPS lock pending.", Toast.LENGTH_SHORT).show();
+				 Toast.makeText(CaptureActivity.this, R.string.unable_to_record, Toast.LENGTH_SHORT).show();
 			}
 		}
 	

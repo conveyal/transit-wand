@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/passengerImageView"
         android:layout_toRightOf="@+id/passengerImageView"
-        android:text="TransitWand"
+        android:text="@string/app_name"
         android:textColor="#aaa"
         android:textSize="30sp" />
 
@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/WandButton"
         android:layout_below="@+id/WandButton"
-        android:text="Capture"
+        android:text="@string/capture"
         android:textColor="#aaa" />
 
     <TextView
@@ -64,7 +64,7 @@
         android:layout_alignBaseline="@+id/descriptionText"
         android:layout_alignBottom="@+id/descriptionText"
         android:layout_centerHorizontal="true"
-        android:text="Review"
+        android:text="@string/review"
         android:textColor="#aaa" />
 
     <TextView
@@ -74,7 +74,7 @@
         android:layout_alignBaseline="@+id/totalPasssengerCount"
         android:layout_alignBottom="@+id/totalPasssengerCount"
         android:layout_alignLeft="@+id/UploadButton"
-        android:text="Upload"
+        android:text="@string/upload"
         android:textColor="#aaa" />
 
     <TextView

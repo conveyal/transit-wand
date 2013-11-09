@@ -36,7 +36,7 @@ public class UploadActivity extends Activity {
 		setContentView(R.layout.activity_upload);
 	
 		if(getFilesDir().listFiles().length == 0) {
-			Toast.makeText(UploadActivity.this, "No data to upload.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(UploadActivity.this, R.string.no_data_upload, Toast.LENGTH_SHORT).show();
 			finish();
 			return;
 		}
@@ -91,10 +91,10 @@ public class UploadActivity extends Activity {
 		String dataSizeFormated = "";
 		
 		if(dataSize / 1024 / 1024 > 1) {
-			dataSizeFormated = distanceFormat.format(dataSize / 1024 / 1024) + "Mb";
+			dataSizeFormated = distanceFormat.format(dataSize / 1024 / 1024) + R.string.kb;
 		}
 		else {
-			dataSizeFormated = distanceFormat.format(dataSize / 1024) + "Kb";
+			dataSizeFormated = distanceFormat.format(dataSize / 1024) + R.string.mb;
 		}
 		
 		TextView dataSizeText = (TextView) findViewById(R.id.dataSizeText);		
@@ -143,7 +143,7 @@ public class UploadActivity extends Activity {
 						    	
 						    	try {
 						    		
-						    		Toast.makeText(UploadActivity.this, "Data uploaded.", Toast.LENGTH_SHORT).show();
+						    		Toast.makeText(UploadActivity.this, R.string.data_uploaded, Toast.LENGTH_SHORT).show();
 									
 						    		 for(File f : getFilesDir().listFiles()) {
 						    			f.delete();
@@ -160,7 +160,7 @@ public class UploadActivity extends Activity {
 							    	ImageButton uploadButton = (ImageButton) findViewById(R.id.uploadButton);
 									uploadButton.setVisibility(View.VISIBLE);
 									
-						    		Toast.makeText(UploadActivity.this, "Unable to upload data, check network connection.", Toast.LENGTH_SHORT).show();
+						    		Toast.makeText(UploadActivity.this, R.string.unable_to_upload, Toast.LENGTH_SHORT).show();
 						    	}
 						    }
 						    
@@ -175,7 +175,7 @@ public class UploadActivity extends Activity {
 						    	ImageButton uploadButton = (ImageButton) findViewById(R.id.uploadButton);
 								uploadButton.setVisibility(View.VISIBLE);
 								
-						    	Toast.makeText(UploadActivity.this, "Unable to upload data, check network connection.", Toast.LENGTH_SHORT).show();
+						    	Toast.makeText(UploadActivity.this, R.string.unable_to_upload, Toast.LENGTH_SHORT).show();
 						    }
 						});	
 						
