@@ -12,7 +12,6 @@ import java.text.DecimalFormat;
 import com.conveyal.transitwand.TransitWandProtos.Upload;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
-
 import com.loopj.android.http.RequestParams;
 
 import android.os.Bundle;
