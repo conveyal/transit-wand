@@ -63,9 +63,7 @@ public class Application extends Controller {
         for(TripPattern pattern : tripPatterns) {
             patternIds.add(pattern.id);
         }
-
-    	ProcessGisExport gisExport = new ProcessGisExport(patternIds, unitId.toString());
-    	gisExport.doJob();
+        
     	ok();
     }
     
@@ -240,6 +238,40 @@ public class Application extends Controller {
     
     }
     
+    public static void exportGis(String unitId) throws InterruptedException {
+    	
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
+    	String timestamp = sdf.format(new Date());
+ 
+    	ArrayList<Long> patterns = new ArrayList<Long>();
+    	
+    	String[] unitIds = unitId.split(",");
+    	
+    	for(String id : unitIds) {
+    		
+    		Phone p = Phone.find("unitId = ?", id).first();
+   		
+    		if(p != null) {
+    		
+    			List<Route> unitRouteList = Route.find("phone = ?", p).fetch();
+        		
+    			for(Route r : unitRouteList) {
+    				List<TripPattern> tps = TripPattern.find("route = ?", r).fetch();
+    				
+    				for(TripPattern tp : tps) {
+    					patterns.add(tp.id);
+    				}
+    			}
+    		}
+    	}
+    	
+    	ProcessGisExport pge = new ProcessGisExport(patterns, timestamp);
+    			
+    	pge.doJob();
+    	
+    	redirect("/public/data/exports/" + timestamp + ".zip");
+    }
+    
     public static void exportCsv(String unitId) throws IOException {
     	
     	ArrayList<Route> routes = new ArrayList<Route>();
@@ -250,11 +282,15 @@ public class Application extends Controller {
     		
     		Phone p = Phone.find("unitId = ?", id).first();
    		
-    		List<Route> unitRouteList = Route.find("phone = ?", p).fetch();
+    		if(p != null) {
     		
-    		routes.addAll(unitRouteList);
+    			List<Route> unitRouteList = Route.find("phone = ?", p).fetch();
+        		
+        		routes.addAll(unitRouteList);
+    			
+    		}
+    		
     	}
-    	
     	
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_hh-mm");
     	String timestamp = sdf.format(new Date());
@@ -303,6 +339,8 @@ public class Application extends Controller {
    	 		rotuesCsvWriter.writeNext(routeData);
   
    	 		List<TripPatternStop> stops = TripPatternStop.find("pattern.route = ?", r).fetch();
+   	 		
+   	 		System.out.println("route: " + r.id.toString());
    	 		
    	 		for(TripPatternStop s : stops) {
    	 		

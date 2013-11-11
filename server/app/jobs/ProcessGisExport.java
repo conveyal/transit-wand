@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,8 +77,6 @@ import models.transit.TripPattern;
 import models.transit.TripPatternStop;
 import models.transit.TripShape;
 import models.transit.Trip;
-
-
 import play.Logger;
 import play.Play;
 import play.jobs.Job;
@@ -87,22 +87,19 @@ import utils.FeatureAttributeFormatter;
 public class ProcessGisExport extends Job {
 
 	private List<Long> _patternIds;
-    private String _phone;
 
+	private String timestamp;
 	
-	public ProcessGisExport(List<Long> patternIds, String phone)
+	public ProcessGisExport(List<Long> patternIds, String timestamp)
 	{
 		this._patternIds = patternIds;
-        this._phone = phone;
+		this.timestamp = timestamp;
 	}
 	
 	public void doJob() throws InterruptedException {
-		
-		String exportName = "export_" + _phone;
-		
-		File outputZipFile = new File(Play.configuration.getProperty("application.exportDataDirectory"), exportName + ".zip");
-		
-		File outputDirectory = new File(Play.configuration.getProperty("application.exportDataDirectory"), exportName);
+    	
+		File outputDirectory = new File(Play.configuration.getProperty("application.exportDataDirectory"), timestamp);
+		File outputZipFile = new File(Play.configuration.getProperty("application.exportDataDirectory"), timestamp + ".zip");
 		
         try
         {
@@ -115,8 +112,8 @@ public class ProcessGisExport extends Job {
                 outputZipFile.delete();
             }
         	
-        	processStops(outputDirectory, exportName);
-        	processRoute(outputDirectory, exportName);
+        	processStops(outputDirectory, timestamp);
+        	processRoute(outputDirectory, timestamp);
     	
         	DirectoryZip.zip(outputDirectory, outputZipFile);
         	FileUtils.deleteDirectory(outputDirectory); 
