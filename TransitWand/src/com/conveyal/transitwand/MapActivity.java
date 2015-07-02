@@ -38,7 +38,6 @@ import android.graphics.Paint;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -234,8 +233,8 @@ public class MapActivity extends Activity {
 							};
 	
 							AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-							builder.setMessage("Do you want to delete this route?").setPositiveButton("Yes", dialogClickListener)
-							    .setNegativeButton("No", dialogClickListener).show();
+							builder.setMessage(R.string.you_want_delete_route).setPositiveButton(R.string.yes, dialogClickListener)
+							    .setNegativeButton(R.string.no, dialogClickListener).show();
 							
 							break;
 							

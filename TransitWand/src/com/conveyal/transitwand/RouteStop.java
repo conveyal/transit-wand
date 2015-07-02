@@ -1,7 +1,5 @@
 package com.conveyal.transitwand;
 
-import java.util.Date;
-
 import android.location.Location;
 
 public class RouteStop {

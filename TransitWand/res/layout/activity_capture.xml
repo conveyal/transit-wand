@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/StartCaptureButton"
         android:layout_below="@+id/StartCaptureButton"
-        android:text="Start"
+        android:text="@string/start"
         android:textColor="#aaa" />
 
     <TextView
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/StopCaptureButton"
         android:layout_below="@+id/StopCaptureButton"
-        android:text="Finish"
+        android:text="@string/finish"
         android:textColor="#aaa" />
     
     <TextView
@@ -47,7 +47,7 @@
         android:layout_alignRight="@+id/notesText"
         android:layout_below="@+id/notesText"
         android:layout_marginTop="5dp"
-        android:text="Distance:"
+        android:text="@string/distance"
         android:textColor="#aaa" />
     
      <TextView
@@ -57,7 +57,7 @@
         android:layout_alignRight="@+id/notesText"
         android:layout_below="@+id/uploadText"
         android:layout_marginTop="5dp"
-        android:text="Stops:"
+        android:text="@string/stops"
         android:textColor="#aaa" />
     
 
@@ -78,7 +78,7 @@
         android:layout_alignRight="@+id/StartCaptureButton"
         android:layout_below="@+id/descriptionText"
         android:layout_marginTop="15dp"
-        android:text="Duration:"
+        android:text="@string/duration"
         android:textColor="#aaa" />
 
     <ImageView
@@ -127,7 +127,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Route Name"
+        android:text="@string/route_name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -180,7 +180,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/PassengerBoardButton"
         android:layout_centerHorizontal="true"
-        android:text="Passengers"
+        android:text="@string/passengers"
         android:textColor="#aaa" />
 
     <TextView
@@ -189,7 +189,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/routeNameText"
-        android:text="GPS Pending" />
+        android:text="@string/gps_pending" />
 
     <TextView
         android:id="@+id/totalPasssengerCount"

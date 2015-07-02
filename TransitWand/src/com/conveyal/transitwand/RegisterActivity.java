@@ -86,7 +86,7 @@ public class RegisterActivity extends Activity {
 						    	try {
 						    		String unitId = response.getString("unitId");
 						    		
-						    		Toast.makeText(RegisterActivity.this, "Phone registered.", Toast.LENGTH_SHORT).show();
+						    		Toast.makeText(RegisterActivity.this, R.string.phone_registered, Toast.LENGTH_SHORT).show();
 						    		
 						    		SharedPreferences prefsManager = PreferenceManager.getDefaultSharedPreferences(RegisterActivity.this);
 						    		prefsManager.edit().putBoolean("registered", true).putString("unitId", unitId).putString("userName", userName).commit();
@@ -98,13 +98,13 @@ public class RegisterActivity extends Activity {
 						    		
 						    	}
 						    	catch(Exception e) {		    		
-						    		Toast.makeText(RegisterActivity.this, "Unable to register phone, check network connection.", Toast.LENGTH_SHORT).show();
+						    		Toast.makeText(RegisterActivity.this, R.string.unable_to_register, Toast.LENGTH_SHORT).show();
 						    	}
 						    }
 						    
 						    public void onFailure(Throwable error, String content) {
 						    	
-						    	Toast.makeText(RegisterActivity.this, "Unable to register phone, check network connection.", Toast.LENGTH_SHORT).show();
+						    	Toast.makeText(RegisterActivity.this, R.string.unable_to_register, Toast.LENGTH_SHORT).show();
 						    }
 						});	
 						
